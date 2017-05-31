@@ -16,10 +16,13 @@ function nextTo(scale,list,x,y,n,size) {
 }
 function generateCave() {
     map = [];
+    scenery = [];
     for (var i = 0;i < mapSize;i++) {
         map.push([]);
+        scenery.push([]);
         for (var g = 0;g < mapSize;g++) {
-            map[i].push(Math.floor(Math.random()/0.6))
+            map[i].push(Math.floor(Math.random()/0.6));
+            scenery[i].push(0);
         }
     }
     //console.log(nextTo(1,map,10,10,0));
@@ -59,36 +62,57 @@ function generateCave() {
         console.log(curstring)
     }
 
-    return map;
+    return [map,scenery];
 
 }
 function generateForest() {
     map = [];
+    scenery = [];
     for (var i = 0;i < mapSize;i++) {
         map.push([]);
+        scenery.push([]);
         for (var g = 0;g < mapSize;g++) {
             map[i].push(2);
+            if (Math.floor(Math.random()/0.95) == 1) {
+                scenery[i].push(1);
+            }
+            else {
+                scenery[i].push(0);
+            }
         }
     }
-    return map;
+
+    return [map,scenery];
 }
 function generateDesert() {
     map = [];
+    scenery = [];
     for (var i = 0;i < mapSize;i++) {
-        map.push([]);
+        map.push([]); scenery.push([]);
         for (var g = 0;g < mapSize;g++) {
             map[i].push(3);
+            if (Math.floor(Math.random()/0.95) == 1) {
+                scenery[i].push(2);
+            }
+            else {
+                scenery[i].push(0);
+            }
         }
     }
-    return map;
+    return [map,scenery];
 }
-function objectify(map) {
+function objectify(map,scenery) {
     for (var i = 0;i <mapSize;i++) {
         for (var g = 0;g<mapSize;g++) {
             for (var h = 0; h <Tiles.length;h++) {
 
                 if (Tiles[h].CODE == map[i][g]) {
                     map[i][g] = Tiles[h];
+                }
+            }
+            for (var h =0;h<Scenery.length;h++) {
+                if (Scenery[h].CODE == scenery[i][g]) {
+                    scenery[i][g] = Scenery[h];
                 }
             }
         }

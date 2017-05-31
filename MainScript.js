@@ -14,8 +14,10 @@ window.onload = function() {
     tileSize = 32;
     createBiome();
     map = segmentList[mapY][mapX].map;
+    scenery = segmentList[mapY][mapX].scenery;
+    objectify(map,scenery);
+    console.log(pCanMove(11,10));
 
-    objectify(map);
     setInterval(timerTick,17);
 
     timerTick();
@@ -25,16 +27,16 @@ window.onload = function() {
 function timerTick() {
     //console.log("hello");
     if (moveTimer > 7) {
-        if (left) {
+        if (left && pCanMove(px-1,py)) {
             px -= 1; moveTimer = 0;
         }
-        else if (right) {
+        else if (right && pCanMove(px+1,py)) {
             px += 1; moveTimer = 0;
         }
-        else if (up) {
+        else if (up && pCanMove(px,py-1)) {
             py -= 1; moveTimer = 0;
         }
-        else if (down) {
+        else if (down && pCanMove(px,py+1)) {
             py += 1; moveTimer = 0;
         }
     }
@@ -67,7 +69,10 @@ function moveSegment() {
         createBiome();
 
         map = segmentList[mapY][mapX].map;
-        console.log(map)
+        scenery = segmentList[mapY][mapX].scenery;
+        objectify(map,scenery);
+        console.log(map,scenery);
+
         //objectify(map)
     }
 }
@@ -88,24 +93,47 @@ function keyUp() {
         case 40: down = false; break;
     }
 }
+function pCanMove(x,y) {
+    if (x < 0 || x >= mapSize || y < 0 || y >= mapSize) {
+        return true;
+    }
+    return (map[y][x].CAN_MOVE && (scenery[y][x]==0 || scenery[y][x].CAN_MOVE));
+}
 function draw() {
-    context.fillStyle="black";
-    context.fillRect(0,0,C1.width,C1.height);
-    context.fillStyle="red";
-    context.fillRect(14*tileSize,10*tileSize,tileSize,tileSize);
+    context.fillStyle = "black";
+    context.fillRect(0, 0, C1.width, C1.height);
+    context.fillStyle = "red";
+    context.fillRect(14 * tileSize, 10 * tileSize, tileSize, tileSize);
 
     yCTR = 0;
-    for (var i = py - 10;i < py +11;i++) {
+    for (var i = py - 10; i < py + 11; i++) {
         xCTR = 0;
-        for (var g = px -14;g < px +15;g++) {
-            if (g >=0 && g < 100 && i >=0 && i < 100) {
+        for (var g = px - 14; g < px + 15; g++) {
+            if (g >= 0 && g < 100 && i >= 0 && i < 100) {
                 context.fillStyle = map[i][g].COLOR;
-                context.fillRect(xCTR*tileSize,yCTR*tileSize, tileSize,tileSize)
-            }
-            xCTR +=1
-        }
-        yCTR +=1
+                context.fillRect(xCTR * tileSize, yCTR * tileSize, tileSize, tileSize);
 
+            }
+            xCTR += 1
+        }
+        yCTR += 1
+
+    }
+    context.fillStyle = "red";
+    context.fillRect(14*tileSize,10*tileSize,20,20);
+    yCTR = 0;
+    for (var i = py - 10; i < py + 11; i++) {
+        xCTR = 0;
+        for (var g = px - 14; g < px + 15; g++) {
+            if (g >= 0 && g < 100 && i >= 0 && i < 100) {
+                if (scenery[i][g] != 0) {
+                    context.fillStyle = scenery[i][g].COLOR;
+                    context.fillRect(xCTR * tileSize, yCTR * tileSize, 20, 20);
+                }
+            }
+            xCTR +=1;
+        }
+        yCTR +=1;
     }
 }
 

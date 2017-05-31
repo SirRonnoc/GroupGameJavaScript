@@ -44,9 +44,9 @@ function generateArea() {
 }
 var biome = function(type) {
     switch(type) {
-        case 0: this.map = generateForest();this.type = 0; break;
-        case 1: this.map = generateCave();this.type = 1; break;
-        case 2: this.map = generateDesert();this.type = 2;break;
+        case 0: this.setter = generateForest();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 0; break;
+        case 1: this.setter = generateCave();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 1; break;
+        case 2: this.setter = generateDesert();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 2;break;
 
     }
 
