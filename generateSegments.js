@@ -62,6 +62,26 @@ function generateCave() {
     return map;
 
 }
+function generateForest() {
+    map = [];
+    for (var i = 0;i < mapSize;i++) {
+        map.push([]);
+        for (var g = 0;g < mapSize;g++) {
+            map[i].push(2);
+        }
+    }
+    return map;
+}
+function generateDesert() {
+    map = [];
+    for (var i = 0;i < mapSize;i++) {
+        map.push([]);
+        for (var g = 0;g < mapSize;g++) {
+            map[i].push(3);
+        }
+    }
+    return map;
+}
 function objectify(map) {
     for (var i = 0;i <mapSize;i++) {
         for (var g = 0;g<mapSize;g++) {

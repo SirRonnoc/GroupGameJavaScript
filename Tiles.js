@@ -3,4 +3,6 @@
  */
 var caveWall = {CAN_MOVE:false,CODE:0,COLOR:"black"};
 var caveFloor = {CAN_MOVE:true,CODE:1,COLOR:"grey"};
-Tiles = [caveWall,caveFloor];
+var desert = {CAN_MOVE:true,CODE:3,COLOR:"yellow"};
+var forestFloor = {CAN_MOVE:true,CODE:2,COLOR:"yellow"};
+Tiles = [caveWall,caveFloor,desert,forestFloor];

@@ -12,14 +12,16 @@ window.onload = function() {
     px=py=10;
     pMT = 0;
     tileSize = 32;
-    map = generateCave();
+    createBiome();
+    map = segmentList[mapY][mapX].map;
+
     objectify(map);
     setInterval(timerTick,17);
 
     timerTick();
 
 
-}
+};
 function timerTick() {
     //console.log("hello");
     if (moveTimer > 7) {
@@ -37,7 +39,37 @@ function timerTick() {
         }
     }
     moveTimer +=1;
+    moveSegment();
     draw();
+
+}
+function moveSegment() {
+    if (px < 0 || py < 0 || px >= mapSize || py >= mapSize) {
+        //console.log("Type Is: ", segmentList[mapY][mapX].type);
+        segmentList[mapY][mapX] = segmentList[mapY][mapX].type;
+        if (px < 0) {
+
+            mapX -=1;
+            px = mapSize-1;
+        }
+        else if (px >=mapSize) {
+            mapX +=1;
+            px = 0;
+        }
+        else if (py < 0 ) {
+            mapY -=1;
+            py = mapSize-1;
+        }
+        else {
+            mapY +=1;
+            py = 0;
+        }
+        createBiome();
+
+        map = segmentList[mapY][mapX].map;
+        console.log(map)
+        //objectify(map)
+    }
 }
 function keyPressed() {
     switch(event.keyCode) {

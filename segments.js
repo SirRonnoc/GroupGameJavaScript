@@ -2,6 +2,7 @@
  * Created by 2019006 on 5/30/2017.
  */
 segmentList = [];
+mapX=mapY=10;
 function generateArea() {
     for (var i = 0;i < 50;i++) {
         segmentList.push([]);
@@ -40,5 +41,17 @@ function generateArea() {
         console.log(curstring);
     }
 
+}
+var biome = function(type) {
+    switch(type) {
+        case 0: this.map = generateForest();this.type = 0; break;
+        case 1: this.map = generateCave();this.type = 1; break;
+        case 2: this.map = generateDesert();this.type = 2;break;
+
+    }
+
+};
+function createBiome() {
+    segmentList[mapY][mapX] = new biome(segmentList[mapY][mapX]);
 }
 generateArea();
