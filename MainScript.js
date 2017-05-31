@@ -13,8 +13,9 @@ window.onload = function() {
     pMT = 0;
     tileSize = 32;
     map = generateCave();
+    objectify(map);
     setInterval(timerTick,17);
-    console.log(map);
+
     timerTick();
 
 
@@ -66,14 +67,8 @@ function draw() {
         xCTR = 0;
         for (var g = px -14;g < px +15;g++) {
             if (g >=0 && g < 100 && i >=0 && i < 100) {
-                if (map[i][g] == 1) {
-                    context.fillStyle="grey";
-                    context.fillRect(xCTR*tileSize,yCTR*tileSize, tileSize,tileSize)
-                }
-                else{
-                    context.fillStyle = "black";
-                    context.fillRect(xCTR*tileSize,yCTR*tileSize, tileSize,tileSize)
-                }
+                context.fillStyle = map[i][g].COLOR;
+                context.fillRect(xCTR*tileSize,yCTR*tileSize, tileSize,tileSize)
             }
             xCTR +=1
         }
