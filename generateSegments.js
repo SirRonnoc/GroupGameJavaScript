@@ -101,6 +101,22 @@ function generateDesert() {
     }
     return [map,scenery];
 }
+function generateSwamp() {
+    map = []; scenery = [];
+    for (var i = 0;i < mapSize;i++) {
+        map.push([]);scenery.push([]);
+        for (var g = 0;g < mapSize;g++) {
+            if (Math.random() <0.25) {
+                map[i].push(4);
+            }
+            else {
+                map[i].push(5);
+            }
+            scenery[i].push(0);
+        }
+    }
+    return [map,scenery];
+}
 function objectify(map,scenery) {
     for (var i = 0;i <mapSize;i++) {
         for (var g = 0;g<mapSize;g++) {

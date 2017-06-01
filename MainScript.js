@@ -12,12 +12,18 @@ window.onload = function() {
     px=py=10;
     pMT = 0;
     tileSize = 32;
+    enemyMoveTimer = 0;
     createBiome();
     map = segmentList[mapY][mapX].map;
     scenery = segmentList[mapY][mapX].scenery;
+    enemyList = [];
+    str = "hi there man ";
+    console.log(str.split(" "));
     objectify(map,scenery);
-    console.log(pCanMove(11,10));
-
+    placeEnemies(20);
+    console.log(enemyList);
+    writeLevel();
+    console.log(readLevel());
     setInterval(timerTick,17);
 
     timerTick();
@@ -27,19 +33,26 @@ window.onload = function() {
 function timerTick() {
     //console.log("hello");
     if (moveTimer > 7) {
-        if (left && pCanMove(px-1,py)) {
+        if (left && pCanMove(px-1,py,0)) {
             px -= 1; moveTimer = 0;
         }
-        else if (right && pCanMove(px+1,py)) {
+        else if (right && pCanMove(px+1,py,0)) {
             px += 1; moveTimer = 0;
         }
-        else if (up && pCanMove(px,py-1)) {
+        else if (up && pCanMove(px,py-1,0)) {
             py -= 1; moveTimer = 0;
         }
-        else if (down && pCanMove(px,py+1)) {
+        else if (down && pCanMove(px,py+1,0)) {
             py += 1; moveTimer = 0;
         }
     }
+    if (enemyMoveTimer >= 15) {
+        for (var i = 0; i < enemyList.length; i++) {
+            eWander(i);
+        }
+        enemyMoveTimer = 0;
+    }
+    enemyMoveTimer +=1;
     moveTimer +=1;
     moveSegment();
     draw();
@@ -48,6 +61,7 @@ function timerTick() {
 function moveSegment() {
     if (px < 0 || py < 0 || px >= mapSize || py >= mapSize) {
         //console.log("Type Is: ", segmentList[mapY][mapX].type);
+        writeLevel();
         segmentList[mapY][mapX] = segmentList[mapY][mapX].type;
         if (px < 0) {
 
@@ -66,6 +80,7 @@ function moveSegment() {
             mapY +=1;
             py = 0;
         }
+
         createBiome();
 
         map = segmentList[mapY][mapX].map;
@@ -74,6 +89,28 @@ function moveSegment() {
         console.log(map,scenery);
 
         //objectify(map)
+    }
+}
+function placeEnemies(zoneSize) {
+    spawned = false;
+    //stuff = new Enemy(10,20);
+    zones = mapSize/zoneSize;
+    console.log(zones);
+    for (var i = 0;i < zones;i++) {
+        for (var g = 0; g < zones; g++) {
+            spawned = false;
+            for (var h = 0; h < zoneSize; h++) {
+                if (spawned == false) {
+                    for (var b = 0; b < zoneSize; b++) {
+
+                        if (pCanMove( g * zoneSize + b,i * zoneSize + h,0) && spawned == false) {
+                            enemyList.push(new Enemy(g * zoneSize + b, i * zoneSize + h));
+                            spawned = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 function keyPressed() {
@@ -93,7 +130,20 @@ function keyUp() {
         case 40: down = false; break;
     }
 }
-function pCanMove(x,y) {
+function pCanMove(x,y,type) {
+
+
+    if (type == 1) {
+        for (var i = 0;i < enemyList.length;i++) {
+            if (enemyList[i].x == x && enemyList[i].y == y) {
+                return false;
+            }
+        }
+        if (x < 0 || x >= mapSize || y < 0 || y >= mapSize) {
+            return false;
+        }
+
+    }
     if (x < 0 || x >= mapSize || y < 0 || y >= mapSize) {
         return true;
     }
@@ -134,6 +184,11 @@ function draw() {
             xCTR +=1;
         }
         yCTR +=1;
+    }
+    for (var i = 0;i < enemyList.length;i++) {
+        context.fillStyle = enemyList[i].COLOR;
+        context.fillRect((enemyList[i].x-px)*tileSize + 14*tileSize,(enemyList[i].y-py)*tileSize + 10*tileSize,20,20)
+
     }
 }
 

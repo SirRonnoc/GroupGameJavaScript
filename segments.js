@@ -44,11 +44,29 @@ function generateArea() {
 }
 var biome = function(type) {
     switch(type) {
-        case 0: this.setter = generateForest();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 0; break;
-        case 1: this.setter = generateCave();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 1; break;
-        case 2: this.setter = generateDesert();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 2;break;
+        case 0:
+            if (readLevel() === 0) {
+                this.setter = generateForest();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 0; break;
+            }
+            else {
+                this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 0;break;
+            }
+
+        case 1: if (readLevel() === 0) {
+            this.setter = generateSwamp();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 1; break;
+        }
+        else {
+            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;break;
+        }
+        case 2: if (readLevel() === 0) {
+            this.setter = generateDesert();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 2; break;
+        }
+        else {
+            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;break;
+        }
 
     }
+
 
 };
 function createBiome() {
