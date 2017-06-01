@@ -1,0 +1,12 @@
+body {
+    background-color: #1bafb7;
+}
+#C1 {
+    position: relative;
+    left: 100px;
+}
+#minimap {
+    position: absolute;
+    left: 1070px;
+    top: 20px;
+}

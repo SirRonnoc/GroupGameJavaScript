@@ -25,6 +25,7 @@ window.onload = function() {
     writeLevel();
     console.log(readLevel());
     setInterval(timerTick,17);
+    minimapInit();
 
     timerTick();
 
