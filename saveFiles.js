@@ -1,6 +1,43 @@
 /**
  * Created by 2019006 on 5/31/2017.
  */
+function saveWorld() {
+    saveString = "";
+    for (var i = 0;i < segmentList.length;i++) {
+        for (var g = 0; g < segmentList[i].length;g++) {
+            if (g < segmentList[i].length-1) {
+
+                if (segmentList[i][g].type === undefined) {saveString += String(segmentList[i][g]) + ",";}
+                else {saveString += String(segmentList[i][g].type) + ",";}
+            }
+            else {
+                if (segmentList[i][g].type === undefined) {saveString += String(segmentList[i][g]);}
+                else {saveString += String(segmentList[i][g].type);}
+            }
+        }
+        if (i < segmentList.length-1) {
+            saveString += "/";
+        }
+    }
+    console.log("data: ", saveString);
+    localStorage.setItem("MapData",saveString);
+}
+function readWorld() {
+    var segments = []
+    var data = localStorage.getItem("MapData");
+    if (data === null) {return 0;}
+    segments = data.split("/");
+    for (var i = 0; i < segments.length;i++) {
+        segments[i] = segments[i].split(",");
+    }
+    for (var i = 0; i < segments.length;i++) {
+        for (var g = 0; g < segments[i].length;g++) {
+            segments[i][g] = parseInt(segments[i][g]);
+        }
+    }
+    console.log(segments)
+    return segments;
+}
 function writeLevel() {
     segment = segmentList[mapY][mapX];
     saveString = "";

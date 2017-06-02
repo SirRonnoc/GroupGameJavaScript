@@ -2,7 +2,7 @@
  * Created by 2019006 on 5/30/2017.
  */
 segmentList = [];
-mapX=mapY=10;
+mapX=mapY=20;
 function generateArea() {
     for (var i = 0;i < 50;i++) {
         segmentList.push([]);
@@ -46,23 +46,23 @@ var biome = function(type) {
     switch(type) {
         case 0:
             if (readLevel() === 0) {
-                this.setter = generateForest();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 0; break;
+                this.setter = generateForest();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 0;this.color="green"; break;
             }
             else {
-                this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 0;break;
+                this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 0;this.color = "green";break;
             }
 
         case 1: if (readLevel() === 0) {
-            this.setter = generateSwamp();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 1; break;
+            this.setter = generateSwamp();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 1;this.color = "#02703e"; break;
         }
         else {
-            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;break;
+            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;this.color = "#02703e";break;
         }
         case 2: if (readLevel() === 0) {
-            this.setter = generateDesert();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 2; break;
+            this.setter = generateDesert();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 2;this.color = "yellow"; break;
         }
         else {
-            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;break;
+            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;this.color = "yellow";break;
         }
 
     }
@@ -72,4 +72,9 @@ var biome = function(type) {
 function createBiome() {
     segmentList[mapY][mapX] = new biome(segmentList[mapY][mapX]);
 }
-generateArea();
+if (readWorld() === 0) {
+    generateArea();
+}
+else {
+    segmentList = readWorld();
+}

@@ -3,7 +3,7 @@
  */
 mapSize = 100;
 function nextTo(scale,list,x,y,n,size) {
-    ans = 0;
+    var ans = 0;
     for (var i = -scale;i <=scale;i++) {
         for (var g = -scale;g <=scale;g++) {
             if (x + g >= 0 && x + g <= size - 1 && y + i >= 0 && y + i <= size - 1 && list[y + i][x + g] ==n) {
@@ -15,8 +15,8 @@ function nextTo(scale,list,x,y,n,size) {
     return ans;
 }
 function generateCave() {
-    map = [];
-    scenery = [];
+    var map = [];
+    var scenery = [];
     for (var i = 0;i < mapSize;i++) {
         map.push([]);
         scenery.push([]);
@@ -66,8 +66,8 @@ function generateCave() {
 
 }
 function generateForest() {
-    map = [];
-    scenery = [];
+    var map = [];
+    var scenery = [];
     for (var i = 0;i < mapSize;i++) {
         map.push([]);
         scenery.push([]);
@@ -85,8 +85,8 @@ function generateForest() {
     return [map,scenery];
 }
 function generateDesert() {
-    map = [];
-    scenery = [];
+    var map = [];
+    var scenery = [];
     for (var i = 0;i < mapSize;i++) {
         map.push([]); scenery.push([]);
         for (var g = 0;g < mapSize;g++) {
@@ -102,7 +102,7 @@ function generateDesert() {
     return [map,scenery];
 }
 function generateSwamp() {
-    map = []; scenery = [];
+    var map = []; var scenery = [];
     for (var i = 0;i < mapSize;i++) {
         map.push([]);scenery.push([]);
         for (var g = 0;g < mapSize;g++) {

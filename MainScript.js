@@ -14,6 +14,7 @@ window.onload = function() {
     tileSize = 32;
     enemyMoveTimer = 0;
     createBiome();
+    console.log(segmentList[mapY][mapX].map);
     map = segmentList[mapY][mapX].map;
     scenery = segmentList[mapY][mapX].scenery;
     enemyList = [];
@@ -23,9 +24,11 @@ window.onload = function() {
     placeEnemies(20);
     console.log(enemyList);
     writeLevel();
+    saveWorld();
     console.log(readLevel());
     setInterval(timerTick,17);
     minimapInit();
+
 
     timerTick();
 
@@ -83,9 +86,11 @@ function moveSegment() {
         }
 
         createBiome();
-
+        console.log(map,scenery);
+        //console.log(segmentList[mapY][mapX].map);
         map = segmentList[mapY][mapX].map;
         scenery = segmentList[mapY][mapX].scenery;
+        drawMinimap();
         objectify(map,scenery);
         console.log(map,scenery);
 
