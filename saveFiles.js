@@ -35,7 +35,7 @@ function readWorld() {
             segments[i][g] = parseInt(segments[i][g]);
         }
     }
-    console.log(segments)
+
     return segments;
 }
 function writeLevel() {

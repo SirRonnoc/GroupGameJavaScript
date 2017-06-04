@@ -7,10 +7,11 @@ function minimapInit(){
     drawMinimap();
 }
 function drawMinimap() {
-    console.log("hi");
+
     colorDict = {
       0: "green",1:"#02703e",2:"yellow"
     };
+    //console.log(mCont.fillStyle = colorDict[segmentList[20][21]]);
     mCont.fillStyle="black";
     mCont.fillRect(0,0,mCan.width,mCan.height);
     var yCTR = 0;
@@ -19,18 +20,9 @@ function drawMinimap() {
         for (var g = mapX-10;g < mapX +10;g++) {
             if (i >= 0 && i < segmentList.length && g >=0 && g < segmentList[mapY].length) {
 
-                try {
-                    console.log(segmentList[i][g]);
-                    mCont.fillStyle = colorDict[segmentList[i][g]];
-                }
-                catch(err) {
-                    mCont.fillStyle = segmentList[i][g].color;
-                }
-
-
-
-
-
+                if (mCont.fillStyle = colorDict[segmentList[i][g]] != undefined) {mCont.fillStyle = colorDict[segmentList[i][g]];}
+                else {mCont.fillStyle = segmentList[i][g].color;}
+                
                 mCont.fillRect(xCTR*10,yCTR*10,10,10);
             }
             xCTR +=1;

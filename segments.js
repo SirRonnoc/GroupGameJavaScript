@@ -62,7 +62,7 @@ var biome = function(type) {
             this.setter = generateDesert();this.map = this.setter[0];this.scenery = this.setter[1];this.type = 2;this.color = "yellow"; break;
         }
         else {
-            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 1;this.color = "yellow";break;
+            this.map = readLevel()[0];this.scenery = readLevel()[1];this.type = 2;this.color = "yellow";break;
         }
 
     }

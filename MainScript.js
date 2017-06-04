@@ -14,18 +14,18 @@ window.onload = function() {
     tileSize = 32;
     enemyMoveTimer = 0;
     createBiome();
-    console.log(segmentList[mapY][mapX].map);
+
     map = segmentList[mapY][mapX].map;
     scenery = segmentList[mapY][mapX].scenery;
     enemyList = [];
     str = "hi there man ";
-    console.log(str.split(" "));
+
     objectify(map,scenery);
     placeEnemies(20);
-    console.log(enemyList);
+
     writeLevel();
     saveWorld();
-    console.log(readLevel());
+
     setInterval(timerTick,17);
     minimapInit();
 
@@ -65,6 +65,7 @@ function timerTick() {
 function moveSegment() {
     if (px < 0 || py < 0 || px >= mapSize || py >= mapSize) {
         //console.log("Type Is: ", segmentList[mapY][mapX].type);
+
         writeLevel();
         segmentList[mapY][mapX] = segmentList[mapY][mapX].type;
         if (px < 0) {
@@ -84,15 +85,16 @@ function moveSegment() {
             mapY +=1;
             py = 0;
         }
-
+        //console.log("first: ",segmentList[mapY][mapX]);
         createBiome();
-        console.log(map,scenery);
+
         //console.log(segmentList[mapY][mapX].map);
         map = segmentList[mapY][mapX].map;
         scenery = segmentList[mapY][mapX].scenery;
+        console.log(segmentList[mapY][mapX].color);
         drawMinimap();
         objectify(map,scenery);
-        console.log(map,scenery);
+
 
         //objectify(map)
     }
@@ -101,7 +103,7 @@ function placeEnemies(zoneSize) {
     spawned = false;
     //stuff = new Enemy(10,20);
     zones = mapSize/zoneSize;
-    console.log(zones);
+
     for (var i = 0;i < zones;i++) {
         for (var g = 0; g < zones; g++) {
             spawned = false;
