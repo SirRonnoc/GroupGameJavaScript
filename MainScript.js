@@ -51,9 +51,11 @@ function timerTick() {
         }
     }
     if (enemyMoveTimer >= 15) {
+
         for (var i = 0; i < enemyList.length; i++) {
             eWander(i);
         }
+
         enemyMoveTimer = 0;
     }
     enemyMoveTimer +=1;

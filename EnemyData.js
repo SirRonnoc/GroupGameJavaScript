@@ -10,44 +10,51 @@ var Enemy = function(x,y) {
   this.vectorTime = 0;
 };
 function eWander(n) {
-    enemy = enemyList[n];
+    var before = [enemyList[n].x,enemyList[n].y];
     for (var i = 0;i<5;i++) {
-        if (enemy.vectorTime <=1) {
-            if (pCanMove(enemy.x,enemy.y-1,1) && enemy.vector == 0) {
-                enemy.y-=1;
-                enemy.vectorTime +=1;
-                return;
+        if (enemyList[n].vectorTime <=1) {
+            if (pCanMove(enemyList[n].x,enemyList[n].y-1,1) && enemyList[n].vector == 0) {
+                enemyList[n].y-=1;
+                enemyList[n].vectorTime +=1;
+
+                break;
             }
-            else if (pCanMove(enemy.x+1,enemy.y,1) && enemy.vector == 1) {
-                enemy.x+=1;
-                enemy.vectorTime +=1;
-                return;
+            else if (pCanMove(enemyList[n].x+1,enemyList[n].y,1) && enemyList[n].vector == 1) {
+                enemyList[n].x+=1;
+                enemyList[n].vectorTime +=1;
+
+                break;
             }
-            else if (pCanMove(enemy.x,enemy.y+=1,1) && enemy.vector ==2) {
-            enemy.y +=1;
-            enemy.vectorTime +=1;
-            return;
+            else if (pCanMove(enemyList[n].x,enemyList[n].y+1,1) && enemyList[n].vector ==2) {
+                enemyList[n].y +=1;
+                enemyList[n].vectorTime +=1;
+
+                break;
             }
-            else if (pCanMove(enemy.x-1,enemy.y,1) && enemy.vector == 3) {
-                enemy.x -=1;
-                enemy.vectorTime+=1;
-                return;
+            else if (pCanMove(enemyList[n].x-1,enemyList[n].y,1) && enemyList[n].vector == 3) {
+                enemyList[n].x -=1;
+                enemyList[n].vectorTime+=1;
+
+                break;
             }
             else {
-                if (enemy.vector <3) {
-                    enemy.vector +=1
+                if (enemyList[n].vector <3) {
+                    enemyList[n].vector +=1
                 }
                 else {
-                    enemy.vector = 0;
+                    enemyList[n].vector = 0;
                 }
 
             }
         }
         else {
-            enemy.vector = Math.floor(Math.random()*4);
-            enemy.vectorTime=0;
+            enemyList[n].vector = Math.floor(Math.random()*4);
+            enemyList[n].vectorTime=0;
         }
 
     }
-    enemyList[n] = enemy;
+    //if (Math.abs(before[0]-enemyList[n].x) >=2 || Math.abs(before[1]-enemyList[n].y) >=2) {
+      //  console.log(Math.abs(before[0]-enemyList[n].x) >=2,Math.abs(before[1]-enemyList[n].y) >=2)
+    //}
+
 }

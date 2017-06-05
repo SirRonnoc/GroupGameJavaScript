@@ -22,7 +22,7 @@ function drawMinimap() {
 
                 if (mCont.fillStyle = colorDict[segmentList[i][g]] != undefined) {mCont.fillStyle = colorDict[segmentList[i][g]];}
                 else {mCont.fillStyle = segmentList[i][g].color;}
-                
+
                 mCont.fillRect(xCTR*10,yCTR*10,10,10);
             }
             xCTR +=1;
